@@ -21,7 +21,7 @@ public class MyCanvas extends View {
         pathPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         pathPaint.setColor(Color.BLACK);
         pathPaint.setStyle(Paint.Style.STROKE);
-        pathPaint.setStrokeWidth(70);
+        pathPaint.setStrokeWidth(50);
     }
 
     @Override
@@ -52,5 +52,9 @@ public class MyCanvas extends View {
             activePaths.remove(id);
         }
         invalidate();
+    }
+
+    public void changeColor(int color) {
+        pathPaint.setColor(color);
     }
 }

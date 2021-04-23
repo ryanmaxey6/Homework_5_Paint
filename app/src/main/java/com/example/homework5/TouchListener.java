@@ -1,5 +1,6 @@
 package com.example.homework5;
 
+import android.graphics.Paint;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -7,12 +8,12 @@ import android.view.View;
 import androidx.core.view.GestureDetectorCompat;
 
 public class TouchListener implements View.OnTouchListener {
-    MainActivity mainActivity;
+    PaintActivity paintActivity;
     GestureDetectorCompat gestureDetectorCompat;
 
-    public TouchListener(MainActivity ma) {
-        this.mainActivity = ma;
-        gestureDetectorCompat = new GestureDetectorCompat(this.mainActivity, new MyGestureListener());
+    public TouchListener(PaintActivity pa) {
+        this.paintActivity = pa;
+        gestureDetectorCompat = new GestureDetectorCompat(this.paintActivity, new MyGestureListener());
     }
 
     @Override
@@ -25,14 +26,14 @@ public class TouchListener implements View.OnTouchListener {
                 for (int i = 0, size = event.getPointerCount(); i < size; i++)
                 {
                     int id = event.getPointerId(i);
-                    mainActivity.addPath(id, event.getX(i), event.getY(i));
+                    paintActivity.addPath(id, event.getX(i), event.getY(i));
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
                 for (int i = 0, size = event.getPointerCount(); i < size; i++)
                 {
                     int id = event.getPointerId(i);
-                    mainActivity.updatePath(id, event.getX(i), event.getY(i));
+                    paintActivity.updatePath(id, event.getX(i), event.getY(i));
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -41,7 +42,7 @@ public class TouchListener implements View.OnTouchListener {
                 for (int i = 0, size = event.getPointerCount(); i < size; i++)
                 {
                     int id = event.getPointerId(i);
-                    mainActivity.removePath(id);
+                    paintActivity.removePath(id);
                 }
                 break;
         }
@@ -51,13 +52,13 @@ public class TouchListener implements View.OnTouchListener {
     private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onDoubleTap(MotionEvent e) {
-            mainActivity.onDoubleTap();
+            paintActivity.onDoubleTap();
             return super.onDoubleTap(e);
         }
 
         @Override
         public void onLongPress(MotionEvent e) {
-            mainActivity.onLongPress();
+//            paintActivity.onLongPress();
             super.onLongPress(e);
         }
     }
