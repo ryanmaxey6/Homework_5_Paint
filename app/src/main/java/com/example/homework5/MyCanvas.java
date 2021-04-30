@@ -64,8 +64,9 @@ public class MyCanvas extends View {
         // loop through x and y ArrayLists
         for (int i = 0; i < icons.size(); i++)
         {
-            canvas.drawBitmap(icons.get(i), xCoordinates.get(i).floatValue(),
-                    yCoordinates.get(i).floatValue(), pathPaint);
+            float x = xCoordinates.get(i).floatValue() - (icons.get(i).getWidth() / 2);
+            float y = yCoordinates.get(i).floatValue() - (icons.get(i).getHeight() / 2);
+            canvas.drawBitmap(icons.get(i), x, y, pathPaint);
         }
 
         super.onDraw(canvas);
