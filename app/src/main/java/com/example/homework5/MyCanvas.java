@@ -27,10 +27,15 @@ public class MyCanvas extends View {
     ArrayList<Float> yCoordinates = new ArrayList<>();
     ArrayList<Bitmap> icons = new ArrayList<>();
 
+    ArrayList<AddedItemType> addedItems = new ArrayList<>();
+
     Paint pathPaint;
     int currColor;
 
-    boolean drawing;
+    enum AddedItemType {
+        PATH,
+        ICON
+    }
 
     public MyCanvas(Context context, AttributeSet attrs)
     {
@@ -87,6 +92,7 @@ public class MyCanvas extends View {
         if (activePaths.containsKey(id)) {
             Stroke stroke = activePaths.remove(id);
             completedPaths.add(stroke);
+            addedItems.add(AddedItemType.PATH);
         }
         invalidate();
     }
@@ -102,13 +108,25 @@ public class MyCanvas extends View {
         xCoordinates.clear();
         yCoordinates.clear();
         icons.clear();
+        addedItems.clear();
         invalidate();
     }
 
     public void undoPaint() {
-        if (completedPaths.size() != 0) {
-            completedPaths.remove(completedPaths.size() - 1);
-            invalidate();
+        if (addedItems.size() > 0)
+        {
+            AddedItemType addedItem = addedItems.remove(addedItems.size() - 1);
+
+            if (completedPaths.size() != 0 && addedItem == AddedItemType.PATH) {
+                completedPaths.remove(completedPaths.size() - 1);
+                invalidate();
+            }
+            else if (icons.size() != 0 && addedItem == AddedItemType.ICON) {
+                icons.remove(icons.size() - 1);
+                xCoordinates.remove(xCoordinates.size() - 1);
+                yCoordinates.remove(yCoordinates.size() - 1);
+                invalidate();
+            }
         }
     }
 
@@ -121,6 +139,8 @@ public class MyCanvas extends View {
         Bitmap icon = BitmapFactory.decodeResource(res, R.drawable.hokie_pic);
         icon = Bitmap.createScaledBitmap(icon,  150, 150, true);
         icons.add(icon);
+        addedItems.add(AddedItemType.ICON);
+        invalidate();
     }
 
     public void addIcon2(float x, float y) {
@@ -128,7 +148,9 @@ public class MyCanvas extends View {
         yCoordinates.add(y);
         Resources res = getResources();
         Bitmap icon = BitmapFactory.decodeResource(res, R.drawable.hokie_feet);
-        icon = Bitmap.createScaledBitmap(icon, 150, 150, true);
+        icon = Bitmap.createScaledBitmap(icon, 175, 175, true);
         icons.add(icon);
+        addedItems.add(AddedItemType.ICON);
+        invalidate();
     }
 }
