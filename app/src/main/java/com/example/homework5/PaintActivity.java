@@ -17,8 +17,6 @@ public class PaintActivity extends AppCompatActivity {
     MyCanvas myCanvas;
     TouchListener touchListener;
 
-    Random rd = new Random();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +42,6 @@ public class PaintActivity extends AppCompatActivity {
         myCanvas.removePath(id);
     }
 
-    public void onDoubleTap() {
-        myCanvas.setBackgroundColor(Color.rgb(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
-    }
-
     public void changePaintColor(View view) {
         switch (view.getId()) {
             case R.id.bRed:
@@ -62,4 +56,23 @@ public class PaintActivity extends AppCompatActivity {
         }
     }
 
+    public void done(View view) {
+        finish();
+    }
+
+    public void clear(View view) {
+        myCanvas.clearCanvas();
+    }
+
+    public void undo(View view) {
+        myCanvas.undoPaint();
+    }
+
+    public void onDoubleTap(float x, float y) {
+        myCanvas.addIcon(x, y);
+    }
+
+    public void onLongPress(float x, float y) {
+        myCanvas.addIcon2(x, y);
+    }
 }
