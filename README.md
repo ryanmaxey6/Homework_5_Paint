@@ -18,7 +18,7 @@ Paint is an app that allows users to paint and add stickers to a picture they ha
 
 ### App Walkthough GIF
 
-<img src="https://i.imgur.com/sxaHzbw.gif" width=250><br>
+<img src="https://i.imgur.com/wsC0dnl.gif" width=250><br>
 
 ### Notes
 It was a little challenging figuring out how to add icons to the screen where the user placed their finger.
