@@ -7,7 +7,7 @@ Paint is an app that allows users to paint and add stickers to a picture they ha
 
 ### User Stories
 
-#### REQUIRED (10pts)
+#### REQUIRED
 - [x] App can take a picture and show it in the second activity 20%
 - [x] App enables multi-touch drawing, with the selected color 20%
 - [x] App supports adding different icons by double-tapping and long-pressing gesture 15%
